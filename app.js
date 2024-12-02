@@ -24,11 +24,11 @@ app.get('/:miniUrl', async (req, res) => {
     await shortUrl.save();
     return res.redirect(shortUrl.full);
   });
-app.get('/faker', async (req, res) => {
-    const newUrl = await ShortUrl.create({full: "https://www.google.com"});
-    return res.json({"created": newUrl});
-    res.render("index");
-  });
+  app.post('/create', async (req, res) => {
+    let created = await ShortUrl.create({ full: req.body.fullUrl })
+    return res.send({"created": created});
+    
+  })
   
 
 module.exports = app;

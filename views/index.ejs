@@ -8,6 +8,11 @@
 </head>
 <body>
     <p>Hello world from ejs</p>
+    <form action="/create" method="POST">
+        <label for="fullUrl">Url</label>
+        <input required placeholder="Url" type="url" name="fullUrl" id="fullUrl">
+        <button type="submit">Create Short One</button>
+      </form>
     
     <table>
         <thead>
