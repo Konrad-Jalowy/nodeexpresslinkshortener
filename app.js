@@ -1,7 +1,7 @@
 const express = require('express');
 
 const bodyParser = require('body-parser');
-const ShortUrl = require('./models/shortUrl');
+
 const app = express();
 const mainController = require('./controllers/mainController');
 
@@ -45,6 +45,7 @@ app.use(session({
 app.use(doubleCsrfProtection);
 app.use(express.static('public'));
 app.use(flash());
+
 app.get("/", (req, res, next) => {
     res.locals.token = generateToken(req, res, true);
     next();
