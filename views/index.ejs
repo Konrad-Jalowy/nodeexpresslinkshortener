@@ -8,5 +8,24 @@
 </head>
 <body>
     <p>Hello world from ejs</p>
+    
+    <table>
+        <thead>
+          <tr>
+            <th>Full URL:</th>
+            <th>Short URL:</th>
+            <th>Clicks:</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% shortUrls.forEach(shortUrl => { %>
+            <tr>
+              <td><a href="<%= shortUrl.full %>"><%= shortUrl.full %></a></td>
+              <td><a href="<%= shortUrl.short %>"><%= shortUrl.short %></a></td>
+              <td><%= shortUrl.clicks %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
 </body>
 </html>

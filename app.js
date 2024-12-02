@@ -10,8 +10,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-  res.render("index");
+app.get('/', async (req, res) => {
+    const shortUrls = await ShortUrl.find()
+    return res.render("index", {shortUrls});
 });
 app.get('/:miniUrl', async (req, res) => {
     const shortUrl = await ShortUrl.findOne({ short: req.params.miniUrl })

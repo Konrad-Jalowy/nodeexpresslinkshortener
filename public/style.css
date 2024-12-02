@@ -3,3 +3,18 @@
     margin: 0;
     padding: 0;
 }
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border: 3px solid purple;
+  }
+
+td {
+    border: 3px solid purple;
+}
+
+th {
+    border: 3px solid purple;
+}
