@@ -3,41 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="http://localhost:3005/style.css">
+    <%- include('./partials/_head'); %>
 </head>
 <body>
-    <%if (flash_msg.length > 0) { %>
-        <h2>Message:<%- flash_msg %></h2>
-        <h3>Your URL:<%- your_url %></h3>
-    <% } %>
-   
+    <%- include('./partials/_header'); %>
+    <%- include('./partials/_flash'); %>
+    <%- include('./partials/_form'); %>
+    <%- include('./partials/_table'); %>
+    <%- include('./partials/_footer'); %>
     
-    <p>Hello world from ejs</p>
-    <form action="/create" method="POST">
-        <label for="fullUrl">Url</label>
-        <input required placeholder="Url" type="url" name="fullUrl" id="fullUrl">
-        <input type="hidden" id="_csrf" name="_csrf" value="<%- token %>" />
-        <button type="submit">Create Short One</button>
-      </form>
-    
-    <table>
-        <thead>
-          <tr>
-            <th>Full URL:</th>
-            <th>Short URL:</th>
-            <th>Clicks:</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% shortUrls.forEach(shortUrl => { %>
-            <tr>
-              <td><a href="<%= shortUrl.full %>"><%= shortUrl.full %></a></td>
-              <td><a href="<%= shortUrl.short %>"><%= shortUrl.short %></a></td>
-              <td><%= shortUrl.clicks %></td>
-            </tr>
-          <% }) %>
-        </tbody>
-      </table>
 </body>
 </html>
