@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const ShortUrl = require('./models/shortUrl');
 const app = express();
+const mainController = require('./controllers/mainController');
 
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
@@ -44,6 +45,7 @@ app.use(session({
 app.use(doubleCsrfProtection);
 app.use(express.static('public'));
 app.use(flash());
+
 app.get('/', async (req, res) => {
     const shortUrls = await ShortUrl.find()
     const token = generateToken(req, res, true);
@@ -55,30 +57,9 @@ app.get('/', async (req, res) => {
     });
 });
 
-app.get('/:miniUrl', async (req, res) => {
-    const shortUrl = await ShortUrl.findOne({ short: req.params.miniUrl })
-    if (shortUrl === null) {
-        console.log("such url doesnt exist");
-        return res.json({"msg": "wrong url"});
-    }
-    shortUrl.clicks++
-    await shortUrl.save();
-    return res.redirect(shortUrl.full);
-  });
+app.get('/:miniUrl', mainController.mini);
 
-app.post('/create', async (req, res) => {
-    let exists = await ShortUrl.findOne({full: req.body.fullUrl});
-    if(exists !== null){
-        req.flash("flash-msg", "URL already exists");
-        req.flash("your-url", `http://localhost:3005/${exists.short}`);
-        return res.redirect("/");
-    }
-    let created = await ShortUrl.create({ full: req.body.fullUrl })
-    req.flash("flash-msg", "Short URL has been created");
-    req.flash("your-url", `http://localhost:3005/${created.short}`);
-    return res.redirect("/");
-    
-  })
+app.post('/create', mainController.create);
 
 
-module.exports = app;
+exports.app = app;
