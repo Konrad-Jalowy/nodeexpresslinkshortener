@@ -4,9 +4,31 @@ const bodyParser = require('body-parser');
 const ShortUrl = require('./models/shortUrl');
 const app = express();
 
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
+const cookieParser = require('cookie-parser');
+
+const store = new MongoDBStore({
+    uri: process.env.MONGO_URL,
+    collection: 'mySessions'
+  });
+  
+store.on('error', function(error) {
+    console.log(error);
+  });
+
+
+
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    store: store
+  }))
 
 app.use(express.static('public'));
 
@@ -32,7 +54,7 @@ app.post('/create', async (req, res) => {
         return res.json({"msg": "url already exists", "url": exists.short});
     }
     let created = await ShortUrl.create({ full: req.body.fullUrl })
-    return res.send({"created": created});
+    return res.redirect("/");
     
   })
   
