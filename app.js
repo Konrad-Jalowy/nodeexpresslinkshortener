@@ -13,6 +13,14 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
   res.render("index");
 });
+app.get('/:miniUrl', async (req, res) => {
+    const shortUrl = await ShortUrl.findOne({ short: req.params.miniUrl })
+    if (shortUrl === null) {
+        console.log("such url doesnt exist");
+        return res.json({"msg": "wrong url"});
+    }
+    return res.json({"your_url": shortUrl});
+  });
 app.get('/faker', async (req, res) => {
     const newUrl = await ShortUrl.create({full: "https://www.google.com"});
     return res.json({"created": newUrl});
