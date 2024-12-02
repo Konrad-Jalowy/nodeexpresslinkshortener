@@ -19,7 +19,9 @@ app.get('/:miniUrl', async (req, res) => {
         console.log("such url doesnt exist");
         return res.json({"msg": "wrong url"});
     }
-    return res.json({"your_url": shortUrl});
+    shortUrl.clicks++
+    await shortUrl.save();
+    return res.redirect(shortUrl.full);
   });
 app.get('/faker', async (req, res) => {
     const newUrl = await ShortUrl.create({full: "https://www.google.com"});
