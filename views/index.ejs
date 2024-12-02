@@ -11,11 +11,13 @@
         <h2>Message:<%- flash_msg %></h2>
         <h3>Your URL:<%- your_url %></h3>
     <% } %>
+   
     
     <p>Hello world from ejs</p>
     <form action="/create" method="POST">
         <label for="fullUrl">Url</label>
         <input required placeholder="Url" type="url" name="fullUrl" id="fullUrl">
+        <input type="hidden" id="_csrf" name="_csrf" value="<%- token %>" />
         <button type="submit">Create Short One</button>
       </form>
     

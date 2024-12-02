@@ -8,6 +8,18 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
+const { doubleCsrf } = require("csrf-csrf");
+const {
+    invalidCsrfTokenError, // This is just for convenience if you plan on making your own middleware.
+    generateToken, // Use this in your routes to provide a CSRF hash + token cookie and token.
+    validateRequest, // Also a convenience if you plan on making your own middleware.
+    doubleCsrfProtection,
+  } = doubleCsrf({
+    getSecret: () => "Secret", // 
+    getSessionIdentifier: (req) => req.sessionID,
+    getTokenFromRequest: (req) => req.body._csrf, 
+  });
+
 const store = new MongoDBStore({
     uri: process.env.MONGO_URL,
     collection: 'mySessions'
@@ -29,14 +41,17 @@ app.use(session({
     saveUninitialized: true,
     store: store
   }))
-
+app.use(doubleCsrfProtection);
 app.use(express.static('public'));
 app.use(flash());
 app.get('/', async (req, res) => {
     const shortUrls = await ShortUrl.find()
+    const token = generateToken(req, res);
+    console.log(req.headers);
     return res.render("index", {shortUrls, 
         flash_msg: req.flash('flash-msg'), 
-        your_url: req.flash('your-url') 
+        your_url: req.flash('your-url'),
+        token:  token
     });
 });
 
