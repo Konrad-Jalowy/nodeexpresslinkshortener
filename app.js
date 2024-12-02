@@ -45,17 +45,11 @@ app.use(session({
 app.use(doubleCsrfProtection);
 app.use(express.static('public'));
 app.use(flash());
-
-app.get('/', async (req, res) => {
-    const shortUrls = await ShortUrl.find()
-    const token = generateToken(req, res, true);
-    
-    return res.render("index", {shortUrls, 
-        flash_msg: req.flash('flash-msg'), 
-        your_url: req.flash('your-url'),
-        token:  token
-    });
-});
+app.get("/", (req, res, next) => {
+    res.locals.token = generateToken(req, res, true);
+    next();
+})
+app.get('/', mainController.main);
 
 app.get('/:miniUrl', mainController.mini);
 

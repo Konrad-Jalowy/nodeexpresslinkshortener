@@ -3,15 +3,15 @@ const ShortUrl = require('../models/shortUrl');
 
 
 
-exports.main = async function (req, res) {
+exports.main = async (req, res) => {
     const shortUrls = await ShortUrl.find()
-    const token = generateToken(req, res, true);
+    const token = res.locals.token;
     
     return res.render("index", {shortUrls, 
         flash_msg: req.flash('flash-msg'), 
         your_url: req.flash('your-url'),
         token:  token
-    })
+    });
 }
 
 exports.mini = async (req, res) => {
