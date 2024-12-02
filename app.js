@@ -34,7 +34,10 @@ app.use(express.static('public'));
 app.use(flash());
 app.get('/', async (req, res) => {
     const shortUrls = await ShortUrl.find()
-    return res.render("index", {shortUrls, flash_msg: req.flash('flash-msg')});
+    return res.render("index", {shortUrls, 
+        flash_msg: req.flash('flash-msg'), 
+        your_url: req.flash('your-url') 
+    });
 });
 
 app.get('/:miniUrl', async (req, res) => {
@@ -52,10 +55,12 @@ app.post('/create', async (req, res) => {
     let exists = await ShortUrl.findOne({full: req.body.fullUrl});
     if(exists !== null){
         req.flash("flash-msg", "URL already exists");
+        req.flash("your-url", `http://localhost:3005/${exists.short}`);
         return res.redirect("/");
     }
     let created = await ShortUrl.create({ full: req.body.fullUrl })
     req.flash("flash-msg", "Short URL has been created");
+    req.flash("your-url", `http://localhost:3005/${created.short}`);
     return res.redirect("/");
     
   })

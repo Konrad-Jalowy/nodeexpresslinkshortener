@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="http://localhost:3005/style.css">
 </head>
 <body>
-    <%if (flash_msg) { %>
-        <h2><%- flash_msg %></h2>
-      <% } %>
+    <%if (flash_msg.length > 0) { %>
+        <h2>Message:<%- flash_msg %></h2>
+        <h3>Your URL:<%- your_url %></h3>
+    <% } %>
     
     <p>Hello world from ejs</p>
     <form action="/create" method="POST">
