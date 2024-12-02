@@ -14,6 +14,7 @@ app.get('/', async (req, res) => {
     const shortUrls = await ShortUrl.find()
     return res.render("index", {shortUrls});
 });
+
 app.get('/:miniUrl', async (req, res) => {
     const shortUrl = await ShortUrl.findOne({ short: req.params.miniUrl })
     if (shortUrl === null) {
@@ -24,7 +25,12 @@ app.get('/:miniUrl', async (req, res) => {
     await shortUrl.save();
     return res.redirect(shortUrl.full);
   });
-  app.post('/create', async (req, res) => {
+
+app.post('/create', async (req, res) => {
+    let exists = await ShortUrl.findOne({full: req.body.fullUrl});
+    if(exists !== null){
+        return res.json({"msg": "url already exists", "url": exists.short});
+    }
     let created = await ShortUrl.create({ full: req.body.fullUrl })
     return res.send({"created": created});
     
