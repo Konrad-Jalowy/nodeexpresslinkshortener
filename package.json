@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Konrad-Jalowy/nodeexpresslinkshortener#readme",
   "dependencies": {
     "body-parser": "^1.20.3",
+    "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^5.0.0",
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.5",

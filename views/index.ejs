@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="http://localhost:3005/style.css">
 </head>
 <body>
+    <%if (flash_msg) { %>
+        <h2><%- flash_msg %></h2>
+      <% } %>
+    
     <p>Hello world from ejs</p>
     <form action="/create" method="POST">
         <label for="fullUrl">Url</label>

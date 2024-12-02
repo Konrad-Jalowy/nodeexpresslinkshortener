@@ -7,7 +7,7 @@ const app = express();
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const cookieParser = require('cookie-parser');
-
+const flash = require('connect-flash');
 const store = new MongoDBStore({
     uri: process.env.MONGO_URL,
     collection: 'mySessions'
@@ -31,10 +31,10 @@ app.use(session({
   }))
 
 app.use(express.static('public'));
-
+app.use(flash());
 app.get('/', async (req, res) => {
     const shortUrls = await ShortUrl.find()
-    return res.render("index", {shortUrls});
+    return res.render("index", {shortUrls, flash_msg: req.flash('flash-msg')});
 });
 
 app.get('/:miniUrl', async (req, res) => {
@@ -51,9 +51,11 @@ app.get('/:miniUrl', async (req, res) => {
 app.post('/create', async (req, res) => {
     let exists = await ShortUrl.findOne({full: req.body.fullUrl});
     if(exists !== null){
-        return res.json({"msg": "url already exists", "url": exists.short});
+        req.flash("flash-msg", "URL already exists");
+        return res.redirect("/");
     }
     let created = await ShortUrl.create({ full: req.body.fullUrl })
+    req.flash("flash-msg", "Short URL has been created");
     return res.redirect("/");
     
   })
