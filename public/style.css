@@ -18,3 +18,17 @@ td {
 th {
     border: 3px solid purple;
 }
+
+.flash {
+    width: 50%;
+    margin-inline: auto;
+    background-color: rgb(252 165 165);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: space-around;
+    height: 100px;
+    padding: 1rem;
+}
