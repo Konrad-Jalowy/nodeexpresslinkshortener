@@ -5,15 +5,14 @@
 }
 h1 {
     text-transform: uppercase;
-  font-size: 4.5rem;
+  font-size: 5.5rem;
   letter-spacing: .2rem;
   font-weight: bolder;
   text-align: center;
- 
   color: rgb(125 211 252);
   background-color: rgb(2 132 199);
   border-radius: 5px;
-  width: 42%;
+  width: 80%;
   margin-inline: auto;
   margin-bottom: 1rem;
   margin-top: 1rem;

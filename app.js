@@ -45,6 +45,7 @@ app.use(session({
 
 app.use(doubleCsrfProtection);
 app.use(express.static(process.env.STATIC_FILES));
+
 app.use(flash());
 
 
