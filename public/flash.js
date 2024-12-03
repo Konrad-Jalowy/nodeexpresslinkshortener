@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", (event) => {
-    console.log("DOM fully loaded and parsed");
     let flash = document.querySelector(".flash");
     if(flash !== null){
         flash.addEventListener("click", function(){
