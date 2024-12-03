@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             flash.classList.add("ani-fadeout");
             setTimeout(() => {
                 flash.remove();
-            }, 1000);
+            }, 800);
         })
     }
   });

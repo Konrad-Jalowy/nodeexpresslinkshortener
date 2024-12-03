@@ -1,6 +1,17 @@
-<form action="/create" method="POST">
-    <label for="fullUrl">Url</label>
-    <input required placeholder="Url" type="url" name="fullUrl" id="fullUrl">
+<form action="/create" method="POST" class="add-form">
+    
+    <ul>
+      <h2>SHORTEN YOUR LINK!</h2>
+      <li>Enter your link</li>
+      <li>Get new one/existing shortened one</li>
+      <li>Copy to clipboard</li>
+      <li>Open in browser</li>
+      <li>Watch this website for most popular links!</li>
+    </ul>
+    <div class="label-ipt">
+      <label for="fullUrl">Long URL</label>
+      <input required placeholder="Url" type="url" name="fullUrl" id="fullUrl">
+    </div>
     <input type="hidden" id="_csrf" name="_csrf" value="<%- token %>" />
     <button type="submit">Create Short One</button>
   </form>
