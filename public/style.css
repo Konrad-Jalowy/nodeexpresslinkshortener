@@ -50,12 +50,15 @@ th {
 }
 
 .flash-error {
-    background-color: rgb(252 165 165);
+    background-color: rgb(244 63 94);
+    color: rgb(252 231 243);
+    box-shadow: 1px 1px 8px 0px rgb(244 63 94);
 }
 
 .flash-success {
     background-color: rgb(21 128 61);
     color: rgb(209 250 229);
+    box-shadow: 1px 1px 8px 0px rgb(21 128 61);
 }
 
 .ani-fadein {
