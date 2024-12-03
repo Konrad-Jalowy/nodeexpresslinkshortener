@@ -18,7 +18,7 @@ h1 {
   margin-bottom: 1rem;
   margin-top: 1rem;
   padding: .5rem;
-
+  box-shadow: 1px 1px 8px 0px rgb(2 132 199);
 }
 table {
     table-layout: fixed;
