@@ -3,7 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-const mainController = require('./controllers/mainController');
+
+const mainRouter = require('./routes/mainRoutes');
 
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
@@ -28,8 +29,6 @@ store.on('error', function(error) {
     console.log(error);
   });
 
-
-
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.json());
@@ -48,12 +47,6 @@ app.use(express.static(process.env.STATIC_FILES));
 
 app.use(flash());
 
-
-app.get('/', mainController.main);
-
-app.get('/:miniUrl', mainController.mini);
-
-app.post('/create', mainController.create);
-
+app.use('/', mainRouter);
 
 exports.app = app;

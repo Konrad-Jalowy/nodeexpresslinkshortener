@@ -32,6 +32,7 @@ exports.mini = async (req, res) => {
   };
 
 exports.create = async (req, res) => {
+    
     let exists = await ShortUrl.findOne({full: req.body.fullUrl});
     if(exists !== null){
         req.flash("flash-msg", "URL already exists");
