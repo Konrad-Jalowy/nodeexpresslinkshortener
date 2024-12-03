@@ -124,7 +124,19 @@ th {
 
   .add-form button {
     margin-inline: auto;
-    margin-bottom: 5px;
+  margin-bottom: 5px;
+  padding: .5rem 1rem;
+  background-color: rgb(134 25 143);
+  color: rgb(245 208 254);
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all .3s;
+  }
+
+  .add-form button:hover{
+    background-color: rgb(192 38 211);
   }
 
   .add-form .label-ipt input {
