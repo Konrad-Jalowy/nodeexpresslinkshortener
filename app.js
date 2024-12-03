@@ -3,13 +3,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-
+const initializeTemplatingEngine = require('./templating-engine');
+const setuptStaticFiles = require("./static-files");
+const setupFlashMessages = require("./flash-messages");
 const mainRouter = require('./routes/mainRoutes');
 
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const cookieParser = require('cookie-parser');
-const flash = require('connect-flash');
+
 
 const { doubleCsrf } = require("csrf-csrf");
 const {
@@ -29,7 +31,9 @@ store.on('error', function(error) {
     console.log(error);
   });
 
-app.set('view engine', 'ejs');
+
+
+initializeTemplatingEngine(app);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -43,9 +47,10 @@ app.use(session({
   }));
 
 app.use(doubleCsrfProtection);
-app.use(express.static(process.env.STATIC_FILES));
 
-app.use(flash());
+setuptStaticFiles(app);
+setupFlashMessages(app);
+
 
 app.use('/', mainRouter);
 
