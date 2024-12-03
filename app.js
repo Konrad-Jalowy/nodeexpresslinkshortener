@@ -1,16 +1,17 @@
 const express = require('express');
 
 const app = express();
+
 const initializeTemplatingEngine = require('./templating-engine');
 const setuptStaticFiles = require("./static-files");
 const setupFlashMessages = require("./flash-messages");
 const setupBodyParser = require("./bodyparser-setup");
 const setupCookieParser = require('./cookieparser-setup');
-const mainRouter = require('./routes/mainRoutes');
+const setupRoutes = require('./setup-routes');
 
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-const cookieParser = require('cookie-parser');
+
 
 
 const { doubleCsrf } = require("csrf-csrf");
@@ -32,7 +33,6 @@ store.on('error', function(error) {
   });
 
 
-
 initializeTemplatingEngine(app);
 
 setupBodyParser(app);
@@ -50,7 +50,7 @@ app.use(doubleCsrfProtection);
 
 setuptStaticFiles(app);
 setupFlashMessages(app);
+setupRoutes(app);
 
-app.use('/', mainRouter);
 
 exports.app = app;
