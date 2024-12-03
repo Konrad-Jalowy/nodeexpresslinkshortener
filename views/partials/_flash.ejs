@@ -1,6 +1,6 @@
 <%if (flash_msg.length > 0) { %>
     <div class="flash <%- flash_cls %> ani-fadein">
     <h2>Message:<%- flash_msg %></h2>
-    <h3>Your URL:<%- your_url %></h3>
+    <h3>Your URL: <a href="<%- your_url %>"><%- your_url %></a></h3>
     </div>
 <% } %>

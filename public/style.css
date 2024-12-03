@@ -86,3 +86,8 @@ th {
       opacity: 0;
     }
   }
+
+  h3 a {
+    text-decoration: none;
+    color: inherit;
+  }
