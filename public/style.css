@@ -38,5 +38,6 @@ th {
 }
 
 .flash-success {
-    background-color: rgb(134 239 172);
+    background-color: rgb(21 128 61);
+    color: rgb(209 250 229);
 }
