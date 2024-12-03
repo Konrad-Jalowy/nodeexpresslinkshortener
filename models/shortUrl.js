@@ -16,6 +16,14 @@ const shortUrlSchema = new mongoose.Schema({
     required: true,
     default: 0
   }
-})
+}, {timestamps: true, 
+  toJSON: {virtuals: true}, 
+  toObject: {virtuals: true}
+ });
+
+shortUrlSchema.virtual('https').get(function() {
+  return this.full.startsWith('https') ? 'YES' : 'NO';
+});
+
 
 module.exports = mongoose.model('ShortUrl', shortUrlSchema)
