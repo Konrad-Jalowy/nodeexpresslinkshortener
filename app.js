@@ -9,6 +9,7 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
+
 const { doubleCsrf } = require("csrf-csrf");
 const {
     doubleCsrfProtection,
