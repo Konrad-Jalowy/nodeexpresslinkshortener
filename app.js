@@ -1,11 +1,10 @@
 const express = require('express');
 
-const bodyParser = require('body-parser');
-
 const app = express();
 const initializeTemplatingEngine = require('./templating-engine');
 const setuptStaticFiles = require("./static-files");
 const setupFlashMessages = require("./flash-messages");
+const setupBodyParser = require("./bodyparser-setup");
 const mainRouter = require('./routes/mainRoutes');
 
 const session = require('express-session');
@@ -35,8 +34,8 @@ store.on('error', function(error) {
 
 initializeTemplatingEngine(app);
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+setupBodyParser(app);
+
 app.use(cookieParser());
 
 app.use(session({
