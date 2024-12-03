@@ -22,7 +22,7 @@ th {
 .flash {
     width: 50%;
     margin-inline: auto;
-    background-color: rgb(252 165 165);
+    
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -31,4 +31,12 @@ th {
     justify-content: space-around;
     height: 100px;
     padding: 1rem;
+}
+
+.flash-error {
+    background-color: rgb(252 165 165);
+}
+
+.flash-success {
+    background-color: rgb(134 239 172);
 }

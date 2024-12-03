@@ -16,6 +16,7 @@ exports.main = async (req, res) => {
     return res.render("index", {shortUrls, 
         flash_msg: req.flash('flash-msg'), 
         your_url: req.flash('your-url'),
+        flash_cls: req.flash('flash-cls'),
         token:  token
     });
 }
@@ -35,11 +36,13 @@ exports.create = async (req, res) => {
     if(exists !== null){
         req.flash("flash-msg", "URL already exists");
         req.flash("your-url", `http://localhost:3005/${exists.short}`);
+        req.flash("flash-cls", `flash-error`);
         return res.redirect("/");
     }
     let created = await ShortUrl.create({ full: req.body.fullUrl })
     req.flash("flash-msg", "Short URL has been created");
     req.flash("your-url", `http://localhost:3005/${created.short}`);
+    req.flash("flash-cls", `flash-success`);
     return res.redirect("/");
     
   }
