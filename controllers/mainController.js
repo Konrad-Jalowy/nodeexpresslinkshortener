@@ -1,11 +1,17 @@
 const { doubleCsrf } = require("csrf-csrf");
 const ShortUrl = require('../models/shortUrl');
 
-
+const {
+    generateToken, 
+  } = doubleCsrf({
+    getSecret: () => "Secret", // 
+    getSessionIdentifier: (req) => req.sessionID,
+    getTokenFromRequest: (req) => req.body._csrf, 
+  });
 
 exports.main = async (req, res) => {
     const shortUrls = await ShortUrl.find()
-    const token = res.locals.token;
+    const token = generateToken(req, res, true);
     
     return res.render("index", {shortUrls, 
         flash_msg: req.flash('flash-msg'), 
@@ -17,7 +23,6 @@ exports.main = async (req, res) => {
 exports.mini = async (req, res) => {
     const shortUrl = await ShortUrl.findOne({ short: req.params.miniUrl })
     if (shortUrl === null) {
-        console.log("such url doesnt exist");
         return res.json({"msg": "wrong url"});
     }
     shortUrl.clicks++
