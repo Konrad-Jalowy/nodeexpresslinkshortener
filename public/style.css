@@ -20,18 +20,22 @@ h1 {
   box-shadow: 1px 1px 8px 0px rgb(2 132 199);
 }
 table {
-    table-layout: fixed;
-    width: 100%;
-    border-collapse: collapse;
-    border: 3px solid purple;
+    /* table-layout: fixed;
+  width: 50%; */
+  border-collapse: collapse;
+  border: 3px solid purple;
+  margin-inline: auto;
+  min-width: 20%;
   }
 
 td {
     border: 3px solid purple;
+    padding: .5rem;
 }
 
 th {
     border: 3px solid purple;
+    padding: 1rem;
 }
 
 .flash {
@@ -53,6 +57,13 @@ th {
   font-size: 1rem;
   font-weight: bold;
   letter-spacing: 2px;
+  background-color: rgb(107 33 168);
+  color: rgb(233 213 255);
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all .3s;
     
 }
 
@@ -101,15 +112,19 @@ th {
   }
 
   .add-form {
-    background-color: gold;
+    background-color: rgb(245 158 11);
   display: flex;
   flex-direction: column;
   align-items: baseline;
   width: 22%;
   margin-inline: auto;
   font-size: 1.5rem;
-  margin-block:1rem;
+  margin-block: 1rem;
   padding: .5rem;
+  border-radius: 5px;
+  color: rgb(254 243 199);
+  font-weight: bold;
+  box-shadow: 1px 1px 6px 0px rgb(245 158 11);
   }
   .add-form ul {
     
@@ -126,8 +141,8 @@ th {
     margin-inline: auto;
   margin-bottom: 5px;
   padding: .5rem 1rem;
-  background-color: rgb(134 25 143);
-  color: rgb(245 208 254);
+  background-color: rgb(107 33 168);
+  color: rgb(233 213 255);
   border: none;
   border-radius: 5px;
   font-weight: bold;
