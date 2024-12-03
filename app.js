@@ -5,6 +5,7 @@ const initializeTemplatingEngine = require('./templating-engine');
 const setuptStaticFiles = require("./static-files");
 const setupFlashMessages = require("./flash-messages");
 const setupBodyParser = require("./bodyparser-setup");
+const setupCookieParser = require('./cookieparser-setup');
 const mainRouter = require('./routes/mainRoutes');
 
 const session = require('express-session');
@@ -36,7 +37,7 @@ initializeTemplatingEngine(app);
 
 setupBodyParser(app);
 
-app.use(cookieParser());
+setupCookieParser(app);
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -49,7 +50,6 @@ app.use(doubleCsrfProtection);
 
 setuptStaticFiles(app);
 setupFlashMessages(app);
-
 
 app.use('/', mainRouter);
 
