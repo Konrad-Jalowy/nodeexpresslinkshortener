@@ -12,8 +12,6 @@ const setupRoutes = require('./setup-routes');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
-
-
 const { doubleCsrf } = require("csrf-csrf");
 const {
     doubleCsrfProtection,
@@ -32,11 +30,8 @@ store.on('error', function(error) {
     console.log(error);
   });
 
-
 initializeTemplatingEngine(app);
-
 setupBodyParser(app);
-
 setupCookieParser(app);
 
 app.use(session({
